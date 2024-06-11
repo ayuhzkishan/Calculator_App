@@ -29,7 +29,8 @@
             android:padding="10dp"
             android:textAlignment="viewEnd"
             android:textSize="50sp"
-            android:id="@+id/inputnumber">
+            android:id="@+id/inputnumber"
+            >
         </EditText>
 
         <EditText
@@ -43,7 +44,9 @@
             android:id="@+id/result"
             android:clickable="false"
             android:textAlignment="viewEnd"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:editable="false"
+            >
 
         </EditText>
 
