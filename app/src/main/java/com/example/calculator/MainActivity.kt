@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val button0 = findViewById<Button>(R.id.button0)
-        val button00 = findViewById<Button>(R.id.button00)
+        val buttonleft = findViewById<Button>(R.id.buttonleft)
         val button1 = findViewById<Button>(R.id.button1)
         val button2 = findViewById<Button>(R.id.button2)
         val button3 = findViewById<Button>(R.id.button3)
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         val button7 = findViewById<Button>(R.id.button7)
         val button8 = findViewById<Button>(R.id.button8)
         val button9 = findViewById<Button>(R.id.button9)
-        val buttonpercent = findViewById<Button>(R.id.buttonpercent)
+        val buttonright = findViewById<Button>(R.id.buttonright)
         val buttonclear = findViewById<Button>(R.id.clear)
         val buttondot = findViewById<Button>(R.id.butondot)
         val buttonequal = findViewById<Button>(R.id.buttonequal)
@@ -97,8 +97,8 @@ class MainActivity : AppCompatActivity() {
             inputtex.setText(text)
             result(text)
         }
-        button00.setOnClickListener {
-            text = inputtex.text.toString() + "00"
+        buttonleft.setOnClickListener {
+            text = inputtex.text.toString() + "("
             inputtex.setText(text)
             result(text)
         }
@@ -127,8 +127,8 @@ class MainActivity : AppCompatActivity() {
             inputtex.setText(text)
             check += 1
         }
-        buttonpercent.setOnClickListener {
-            text = inputtex.text.toString() + "%"
+        buttonright.setOnClickListener {
+            text = inputtex.text.toString() + ")"
             inputtex.setText(text)
             check += 1
         }
@@ -143,21 +143,25 @@ class MainActivity : AppCompatActivity() {
         }
         buttonbackspace.setOnClickListener {
             var backspace: String? = null
-            if (inputtex.text.length > 0) {
+            if (inputtex.text.length > 1) {
                 val stringbuilder: StringBuilder = StringBuilder(inputtex.text)
                 val find = inputtex.text.toString()
                 val find2 = find.last()
 
                 if (find2.equals('+') || find2.equals('-') || find2.equals('*') || find2.equals('/') || find2.equals(
-                        '%'
+                        '(') || find2.equals(')')
                     )
-                ) {
+                 {
                     check -= 1
                 }
                 stringbuilder.deleteCharAt(inputtex.text.length - 1)
                 backspace = stringbuilder.toString()
                 inputtex.setText(backspace)
                 result(backspace)
+            }
+            else if (inputtex.text.length<=1) {
+                inputtex.setText(null)
+
             }
         }
     }
