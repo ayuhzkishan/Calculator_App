@@ -5,9 +5,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import javax.script.ScriptEngine
-import javax.script.ScriptEngineManager
 import javax.script.ScriptException
+import net.objecthunter.exp4j.ExpressionBuilder
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val button0 = findViewById<Button>(R.id.button0)
-        val buttonleft = findViewById<Button>(R.id.buttonleft)
+        val button00 = findViewById<Button>(R.id.button00)
         val button1 = findViewById<Button>(R.id.button1)
         val button2 = findViewById<Button>(R.id.button2)
         val button3 = findViewById<Button>(R.id.button3)
@@ -29,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         val button7 = findViewById<Button>(R.id.button7)
         val button8 = findViewById<Button>(R.id.button8)
         val button9 = findViewById<Button>(R.id.button9)
-        val buttonright = findViewById<Button>(R.id.buttonright)
+        val buttonpower = findViewById<Button>(R.id.buttonpower)
         val buttonclear = findViewById<Button>(R.id.clear)
         val buttondot = findViewById<Button>(R.id.butondot)
         val buttonequal = findViewById<Button>(R.id.buttonequal)
@@ -97,8 +96,8 @@ class MainActivity : AppCompatActivity() {
             inputtex.setText(text)
             result(text)
         }
-        buttonleft.setOnClickListener {
-            text = inputtex.text.toString() + "("
+        button00.setOnClickListener {
+            text = inputtex.text.toString() + "00"
             inputtex.setText(text)
             result(text)
         }
@@ -127,8 +126,8 @@ class MainActivity : AppCompatActivity() {
             inputtex.setText(text)
             check += 1
         }
-        buttonright.setOnClickListener {
-            text = inputtex.text.toString() + ")"
+        buttonpower.setOnClickListener {
+            text = inputtex.text.toString() + "^"
             inputtex.setText(text)
             check += 1
         }
@@ -142,20 +141,20 @@ class MainActivity : AppCompatActivity() {
             resulttext.setText(null)
         }
         buttonbackspace.setOnClickListener {
-            var backspace: String? = null
+          //  var backspace: String? = null
             if (inputtex.text.length > 1) {
                 val stringbuilder: StringBuilder = StringBuilder(inputtex.text)
                 val find = inputtex.text.toString()
                 val find2 = find.last()
 
                 if (find2.equals('+') || find2.equals('-') || find2.equals('*') || find2.equals('/') || find2.equals(
-                        '(') || find2.equals(')')
-                    )
+                        '^'))
+
                  {
                     check -= 1
                 }
                 stringbuilder.deleteCharAt(inputtex.text.length - 1)
-                backspace = stringbuilder.toString()
+                val backspace = stringbuilder.toString()
                 inputtex.setText(backspace)
                 result(backspace)
             }
@@ -169,13 +168,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun result(text: String) {
 
-        val engine: ScriptEngine = ScriptEngineManager().getEngineByName("rhino")
+
         try {
-            val result: Any = engine.eval(text)
-            var mainresult = result.toString()
+            val expression = ExpressionBuilder(text).build()
+            val result = expression.evaluate()
+            val mainresult = result.toString()
 
             if (check == 0) resulttext.setText(null)
-            else{
+            else {
                 resulttext.setText(mainresult)
             }
         } catch (e: ScriptException) {

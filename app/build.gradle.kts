@@ -46,4 +46,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(libs.rhino.android)
+    implementation ("net.objecthunter:exp4j:0.4.8")
 }

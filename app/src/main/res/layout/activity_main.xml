@@ -69,13 +69,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/ripple"
-                android:text="("
+                android:text="AC"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="#B25252"
                 android:gravity="center"
                 android:backgroundTint="#292e37"
-                android:id="@+id/buttonleft">
+                android:id="@+id/clear">
 
             </android.widget.Button>
 
@@ -125,13 +125,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/ripple"
-                android:text="AC"
+                android:text="00"
                 android:textSize="30sp"
                 android:textStyle="bold"
-                android:textColor="#B25252"
+                android:textColor="@color/white"
                 android:gravity="center"
                 android:backgroundTint="#292e37"
-                android:id="@+id/clear">
+                android:id="@+id/button00">
 
             </android.widget.Button>
 
@@ -147,13 +147,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:background="@drawable/ripple"
-                android:text=")"
+                android:text="^"
                 android:textSize="30sp"
                 android:textStyle="bold"
                 android:textColor="#B25252"
                 android:gravity="center"
                 android:backgroundTint="#292e37"
-                android:id="@+id/buttonright">
+                android:id="@+id/buttonpower">
 
             </android.widget.Button>
 
