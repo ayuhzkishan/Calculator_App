@@ -11,8 +11,10 @@ import net.objecthunter.exp4j.ExpressionBuilder
 class MainActivity : AppCompatActivity() {
 
     private lateinit var resulttext: EditText
+    private lateinit var inputtex: EditText
 
     var check = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,9 +39,10 @@ class MainActivity : AppCompatActivity() {
         val buttonmul = findViewById<Button>(R.id.buttonmultiply)
         val buttondivide = findViewById<Button>(R.id.buttondivide)
         val buttonbackspace = findViewById<Button>(R.id.buttonbackspace)
-        resulttext = findViewById(R.id.result)
 
-        val inputtex = findViewById<EditText>(R.id.inputnumber)
+        resulttext = findViewById(R.id.result)
+        inputtex = findViewById(R.id.inputnumber)
+
         inputtex.movementMethod = android.text.method.ScrollingMovementMethod()
         inputtex.setActivated(true)
         inputtex.setPressed(true)
@@ -49,62 +52,50 @@ class MainActivity : AppCompatActivity() {
         button1.setOnClickListener {
             text = inputtex.text.toString() + "1"
             inputtex.setText(text)
-            result(text)
         }
         button2.setOnClickListener {
             text = inputtex.text.toString() + "2"
             inputtex.setText(text)
-            result(text)
         }
         button3.setOnClickListener {
             text = inputtex.text.toString() + "3"
             inputtex.setText(text)
-            result(text)
         }
         button4.setOnClickListener {
             text = inputtex.text.toString() + "4"
             inputtex.setText(text)
-            result(text)
         }
         button5.setOnClickListener {
             text = inputtex.text.toString() + "5"
             inputtex.setText(text)
-            result(text)
         }
         button6.setOnClickListener {
             text = inputtex.text.toString() + "6"
             inputtex.setText(text)
-            result(text)
         }
         button7.setOnClickListener {
             text = inputtex.text.toString() + "7"
             inputtex.setText(text)
-            result(text)
         }
         button8.setOnClickListener {
             text = inputtex.text.toString() + "8"
             inputtex.setText(text)
-            result(text)
         }
         button9.setOnClickListener {
             text = inputtex.text.toString() + "9"
             inputtex.setText(text)
-            result(text)
         }
         button0.setOnClickListener {
             text = inputtex.text.toString() + "0"
             inputtex.setText(text)
-            result(text)
         }
         button00.setOnClickListener {
             text = inputtex.text.toString() + "00"
             inputtex.setText(text)
-            result(text)
         }
         buttondot.setOnClickListener {
             text = inputtex.text.toString() + "."
             inputtex.setText(text)
-            result(text)
         }
         buttonadd.setOnClickListener {
             text = inputtex.text.toString() + "+"
@@ -132,55 +123,24 @@ class MainActivity : AppCompatActivity() {
             check += 1
         }
         buttonequal.setOnClickListener {
-            text = resulttext.text.toString()
-            inputtex.setText(text)
-            resulttext.setText(null)
+            val inputText = inputtex.text.toString()
+            try {
+                val expression = ExpressionBuilder(inputText).build()
+                val result = expression.evaluate()
+                resulttext.setText(result.toString())
+            } catch (e: Exception) {
+                resulttext.setText("Error")
+            }
         }
         buttonclear.setOnClickListener {
             inputtex.setText(null)
             resulttext.setText(null)
         }
         buttonbackspace.setOnClickListener {
-          //  var backspace: String? = null
-            if (inputtex.text.length > 1) {
-                val stringbuilder: StringBuilder = StringBuilder(inputtex.text)
-                val find = inputtex.text.toString()
-                val find2 = find.last()
-
-                if (find2.equals('+') || find2.equals('-') || find2.equals('*') || find2.equals('/') || find2.equals(
-                        '^'))
-
-                 {
-                    check -= 1
-                }
-                stringbuilder.deleteCharAt(inputtex.text.length - 1)
-                val backspace = stringbuilder.toString()
-                inputtex.setText(backspace)
-                result(backspace)
-            }
-            else if (inputtex.text.length<=1) {
-                inputtex.setText(null)
-
-            }
-        }
-    }
-
-
-    private fun result(text: String) {
-
-
-        try {
-            val expression = ExpressionBuilder(text).build()
-            val result = expression.evaluate()
-            val mainresult = result.toString()
-
-            if (check == 0) resulttext.setText(null)
-            else {
-                resulttext.setText(mainresult)
-            }
-        } catch (e: ScriptException) {
-            if (check == 0) {
-                Log.d("TAG","ERROR" )
+            val currentText = inputtex.text.toString()
+            if (currentText.isNotEmpty()) {
+                val newText = currentText.substring(0, currentText.length - 1)
+                inputtex.setText(newText)
             }
         }
     }
