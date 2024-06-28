@@ -46,6 +46,7 @@
             android:textAlignment="viewEnd"
             android:padding="10dp"
             android:editable="false"
+
             >
 
         </EditText>
