@@ -7,3 +7,6 @@ expressions. This library makes it easy to parse and evaluate complex expression
 Interface
 ----------------
 ![WhatsApp Image 2024-06-13 at 9 14 22 AM](https://github.com/ayuhzkishan/Calculator_App/assets/153315870/c2eddcbb-2dab-41cf-a083-c826cdd1b031)
+
+## Credits
+App Icon created by <a href="https://www.flaticon.com/free-icons/maths" title="maths icons">Maths icons created by Freepik - Flaticon</a>
